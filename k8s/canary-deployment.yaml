@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: microservice-app-canary
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: microservice-app
+      version: canary
+
+  template:
+    metadata:
+      labels:
+        app: microservice-app
+        version: canary
+
+    spec:
+      containers:
+        - name: microservice-app
+          image: YOUR_DOCKERHUB_USERNAME/eks-microservices-demo:2.0
+          ports:
+            - containerPort: 3000
